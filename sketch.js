@@ -1,5 +1,18 @@
-w_width = window.innerWidth;
-w_height = window.innerHeight;
+var w_width = window.innerWidth;
+var w_height = window.innerHeight;
+var x = 30;
+var y = 30;
+//var wn = w_width/x;
+//var hn = w_height/y;
+var vehicles = [];
+
+function lister(ll,bb){
+	vehicles = new Array(ll);
+	for (var i=0;i<ll;i++){
+		vehicles[i] = new Array(bb);
+	}
+	setter();
+}
 
 function reportsize(){
 	resizeCanvas(windowWidth,windowHeight);
@@ -8,31 +21,44 @@ function reportsize(){
 
 window.addEventListener('resize', reportsize);
 
+//function point(){
+//	
+//}
 
 function init(){
-	ww = windowWidth;
-	wh = windowHeight;
-	x = 30;
-	y = 30;
-	wn = ww/x;
-	hn = wh/x;
+	ww = window.innerWidth;
+	wh = window.innerHeight;
+	wn = round(ww/x);
+	hn = round(wh/x);
+	console.log(wn,hn)
 	canvas = createCanvas(ww,wh);
 	background(49,49,49);
 	canvas.position(0,0);
 	canvas.style('z-index','-1');
+	lister(wn,hn);
+}
+
+function setter(){
+	for (i = 0; i < wn; i++){
+		for (j = 0; j < hn; j++){
+			vehicles[i][j]= new vehicle(i*x,j*y);
+		}
+	}
 }
 
 
 function setup(){
 	init();
-	stroke('red');
-	strokeWeight(5);
+	console.log(vehicles);
+	
 }
 
 function draw(){
-	for (i = 1; i<wn; i++){
-		for (j = 1; j < wh; j++){
-			point(i*x,j*y);
+	for (i = 0; i < wn; i++){
+		for (j = 0; j < hn; j++){
+			var v = vehicles[i][j];
+			v.update();
+			v.show();
 		}
 	}
 }
