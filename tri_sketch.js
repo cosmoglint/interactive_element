@@ -4,12 +4,12 @@ var x = 30;
 var y = 30;
 //var wn = w_width/x;
 //var hn = w_height/y;
-var vehicles = [];
+var tries = [];
 
 function lister(ll,bb){
-	vehicles = new Array(ll);
+	tries = new Array(ll);
 	for (var i=0;i<ll;i++){
-		vehicles[i] = new Array(bb);
+		tries[i] = new Array(bb);
 	}
 	setter();
 }
@@ -22,7 +22,7 @@ function reportsize(){
 function aversion(){
 	for (i = 0; i < wn; i++){
 	for (j = 0; j < hn; j++){
-		vehicles[i][j].mover();
+//		tries[i][j].mover();
 		}
 	}
 }
@@ -50,7 +50,7 @@ function init(){
 function setter(){
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
-			vehicles[i][j]= new vehicle(i*x,j*y);
+			tries[i][j] = new tris(i*x,j*y);
 		}
 	}
 }
@@ -58,7 +58,7 @@ function setter(){
 
 function setup(){
 	init();
-	console.log(vehicles);
+	console.log(tries );
 	
 }
 
@@ -67,10 +67,8 @@ function draw(){
 	
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
-			var v = vehicles[i][j];
-			v.behaviours();
-			v.update();
-			v.show();
+			var t = tries[i][j];
+			t.show();
 		}
 	}
 }
