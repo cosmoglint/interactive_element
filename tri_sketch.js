@@ -1,10 +1,18 @@
 var w_width = window.innerWidth;
 var w_height = window.innerHeight;
-var x = 30;
-var y = 30;
+var x = 80;
+var y = 80;
 //var wn = w_width/x;
 //var hn = w_height/y;
 var tries = [];
+
+function random_color(){
+	r = random(0,255);
+	g = random(0,255);
+	b = random(0,255);
+	var col = color(r,g,b);
+	return col;
+}
 
 function lister(ll,bb){
 	tries = new Array(ll);
@@ -37,8 +45,8 @@ window.addEventListener('resize', reportsize);
 function init(){
 	ww = window.innerWidth;
 	wh = window.innerHeight;
-	wn = round(ww/x);
-	hn = round(wh/x);
+	wn = round(ww/x) + 2;
+	hn = round(wh/x) + 2;
 	console.log(wn,hn)
 	canvas = createCanvas(ww,wh);
 	background(49,49,49);
