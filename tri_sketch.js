@@ -58,7 +58,8 @@ function init(){
 function setter(){
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
-			tries[i][j] = new tris(i*x,j*y);
+//			tries[i][j] = new tris(i*x,j*y);
+			tries[i][j] = new tris(random(0,ww),random(0,wh));
 		}
 	}
 }
