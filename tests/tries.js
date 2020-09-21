@@ -8,9 +8,9 @@ function tris(p,q,r){
 	this.mp = p5.Vector.div(p5.Vector.add(this.oq,this.or),2);
 	this.mq = p5.Vector.div(p5.Vector.add(this.op,this.or),2);
 	this.mr = p5.Vector.div(p5.Vector.add(this.oq,this.op),2);
-	this.ang_p = atan((mp.y-op.y)/(mp.x-op.x));
-	this.ang_q = atan((mq.y-oq.y)/(mq.x-oq.x));
-	this.ang_r = atan((mr.y-or.y)/(mr.x-or.x));	
+	this.ang_p = atan((this.mp.y-this.op.y)/(this.mp.x-this.op.x));// * Math.PI/180;
+	this.ang_q = atan((this.mq.y-this.oq.y)/(this.mq.x-this.oq.x));// * Math.PI/180;
+	this.ang_r = atan((this.mr.y-this.or.y)/(this.mr.x-this.or.x));// * Math.PI/180;	
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
@@ -28,7 +28,7 @@ tris.prototype.reseter = function(){
 }
 
 tris.prototype.changer = function(){
-	console.log(ang_p);
+	console.log(this.ang_p);
 	
 	dp = dist(mouseX,mouseY,this.op.x,this.op.y);
 	dq = dist(mouseX,mouseY,this.oq.x,this.oq.y);
@@ -37,19 +37,25 @@ tris.prototype.changer = function(){
 //	console.log(dp)
 	if (dp<this.diff){
 		rem = this.diff -dp;
-		this.cp = createVector(this.op.x,this.op.y+rem);
+		mov_x = Math.cos(this.ang_p) * rem;
+		mov_y = Math.sin(this.ang_p) * rem;
+		this.cp = createVector(this.op.x + mov_x,this.op.y+mov_y);
 //		this.cq = createVector(this.oq.x+rem,this.oq.y);
 //		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
 	else if (dq<this.diff){
 		rem = this.diff -dq;
-		this.cp = createVector(this.oq.x,this.oq.y+rem);
+		mov_x = Math.cos(this.ang_q) * rem;
+		mov_y = Math.sin(this.ang_q) * rem;
+		this.cq = createVector(this.oq.x + mov_x,this.oq.y+mov_y);
 //		this.cq = createVector(this.oq.x+rem,this.oq.y);
 //		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
 	else if (dr<this.diff){
 		rem = this.diff -dr;
-		this.cp = createVector(this.or.x,this.or.y+rem);
+		mov_x = Math.cos(this.ang_r) * rem;
+		mov_y = Math.sin(this.ang_r) * rem;
+		this.cr = createVector(this.or.x + mov_x,this.or.y+mov_y);
 //		this.cq = createVector(this.oq.x+rem,this.oq.y);
 //		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
