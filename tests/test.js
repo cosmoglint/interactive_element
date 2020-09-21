@@ -7,6 +7,9 @@ var y = 80;
 var the_tr;
 
 function tris(p,q,r){
+	//o is original position
+	//m is midpoint of the points opposite line
+	//c is current position
 	this.op = p;
 	this.oq = q;
 	this.or = r;
