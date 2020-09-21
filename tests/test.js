@@ -13,7 +13,7 @@ function tris(p,q,r){
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
-	this.diff = 50;
+	this.diff = 300;
 }
 tris.prototype.show = function(){
 	triangle(this.cp.x,this.cp.y,this.cq.x,this.cq.y,this.cr.x,this.cr.y);
@@ -37,10 +37,12 @@ tris.prototype.changer = function(){
 //		diff = createVector(5,5);
 //		this.cp = p5.Vector.add(this.cp,diff);
 		this.cp = createVector(this.op.x,this.op.y+rem);
+		this.cq = createVector(this.oq.x+rem,this.oq.y);
+		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
-	else if (dp==50){
-		this.cp = this.cp;
-	}
+//	else if (dp==50){
+//		this.cp = this.cp;
+//	}
 	else if (dp>50){
 		this.reseter();
 		console.log("fck");
