@@ -10,6 +10,14 @@ function tris(p,q,r){
 	this.op = p;
 	this.oq = q;
 	this.or = r;
+	this.mp = p5.Vector.div(p5.Vector.add(this.oq,this.or),2);
+	this.mq = p5.Vector.div(p5.Vector.add(this.op,this.or),2);
+	this.mr = p5.Vector.div(p5.Vector.add(this.oq,this.op),2);
+//	console.log(this.op,this.oq,this.or);
+//	console.log(this.mp,this.mq,this.mr);
+//	stroke('blue');
+//	strokeWeight(10);
+//	line(this.op.x,this.op.y,this.mp.x,this.mp.y);
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
@@ -34,8 +42,18 @@ tris.prototype.changer = function(){
 //	console.log(dp)
 	if (dp<this.diff){
 		rem = this.diff -dp;
-//		diff = createVector(5,5);
-//		this.cp = p5.Vector.add(this.cp,diff);
+		this.cp = createVector(this.op.x,this.op.y+rem);
+		this.cq = createVector(this.oq.x+rem,this.oq.y);
+		this.cr = createVector(this.or.x-rem,this.or.y);
+	}
+	else if (dq<this.diff){
+		rem = this.diff -dp;
+		this.cp = createVector(this.op.x,this.op.y+rem);
+		this.cq = createVector(this.oq.x+rem,this.oq.y);
+		this.cr = createVector(this.or.x-rem,this.or.y);
+	}
+	else if (dr<this.diff){
+		rem = this.diff -dp;
 		this.cp = createVector(this.op.x,this.op.y+rem);
 		this.cq = createVector(this.oq.x+rem,this.oq.y);
 		this.cr = createVector(this.or.x-rem,this.or.y);
