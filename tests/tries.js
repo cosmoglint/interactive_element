@@ -11,6 +11,12 @@ function tris(p,q,r){
 	this.ang_p = atan((this.mp.y-this.op.y)/(this.mp.x-this.op.x));// * Math.PI/180;
 	this.ang_q = atan((this.mq.y-this.oq.y)/(this.mq.x-this.oq.x));// * Math.PI/180;
 	this.ang_r = atan((this.mr.y-this.or.y)/(this.mr.x-this.or.x));// * Math.PI/180;	
+	this.const_p = this.mp.y-(this.ang_p) * this.mp.x;
+	this.const_q = this.mq.y-(this.ang_q) * this.mq.x;
+	this.const_r = this.mr.y-(this.ang_r) * this.mr.x;
+	this.pxin = (( - this.const_p )/this.ang_p)<0 ? -1 : 1;
+	this.qxin = (( - this.const_q )/this.ang_q)<0 ? -1 : 1;
+	this.rxin = (( - this.const_r )/this.ang_r)<0 ? -1 : 1;
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
@@ -36,7 +42,7 @@ tris.prototype.changer = function(){
 //	console.log(p5.Vector.sub(this.p,this.op));
 //	console.log(dp)
 	if (dp<this.diff){
-		rem = this.diff -dp;
+		rem = (this.diff -dp) * this.pxin;
 		mov_x = Math.cos(this.ang_p) * rem;
 		mov_y = Math.sin(this.ang_p) * rem;
 		this.cp = createVector(this.op.x + mov_x,this.op.y+mov_y);
@@ -44,7 +50,7 @@ tris.prototype.changer = function(){
 //		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
 	else if (dq<this.diff){
-		rem = this.diff -dq;
+		rem = (this.diff -dq) * this.qxin;
 		mov_x = Math.cos(this.ang_q) * rem;
 		mov_y = Math.sin(this.ang_q) * rem;
 		this.cq = createVector(this.oq.x + mov_x,this.oq.y+mov_y);
@@ -52,7 +58,7 @@ tris.prototype.changer = function(){
 //		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
 	else if (dr<this.diff){
-		rem = this.diff -dr;
+		rem = (this.diff -dr) * this.rxin;
 		mov_x = Math.cos(this.ang_r) * rem;
 		mov_y = Math.sin(this.ang_r) * rem;
 		this.cr = createVector(this.or.x + mov_x,this.or.y+mov_y);
