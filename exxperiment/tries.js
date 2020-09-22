@@ -35,9 +35,10 @@ function tris(p,q,r){
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
-	this.diff = 100;
+	this.diff = 50;
 }
 tris.prototype.show = function(){
+	strokeWeight(1);
 	triangle(this.cp.x,this.cp.y,this.cq.x,this.cq.y,this.cr.x,this.cr.y);
 }
 
@@ -52,36 +53,16 @@ tris.prototype.set_und = function(uu){
 	this.und = uu;
 }
 
-tris.prototype.undulate = function(){
-	
-	mov = this.und;
-	
-	rem = mov * this.pxin;
-	mov_x = Math.cos(this.ang_p) * rem;
-	mov_y = Math.sin(this.ang_p) * rem;
-	this.cp = createVector(this.op.x + mov_x,this.op.y+mov_y);
-
-	rem = mov * this.qxin;
-	mov_x = Math.cos(this.ang_q) * rem;
-	mov_y = Math.sin(this.ang_q) * rem;
-	this.cq = createVector(this.oq.x + mov_x,this.oq.y+mov_y);
-	
-	rem = mov * this.rxin;
-	mov_x = Math.cos(this.ang_r) * rem;
-	mov_y = Math.sin(this.ang_r) * rem;
-	this.cr = createVector(this.or.x + mov_x,this.or.y+mov_y);
-	
-	this.show();
-}
-
 tris.prototype.changer = function(){
 //	console.log(this.ang_p,this.ang_q,this.ang_r);
 	
-	dp = dist(mouseX,mouseY,this.op.x,this.op.y);
-	dq = dist(mouseX,mouseY,this.oq.x,this.oq.y);
-	dr = dist(mouseX,mouseY,this.or.x,this.or.y);
+	dp = dist(mouseX,mouseY,this.cp.x,this.cp.y);
+	dq = dist(mouseX,mouseY,this.cq.x,this.cq.y);
+	dr = dist(mouseX,mouseY,this.cr.x,this.cr.y);
 //	console.log(p5.Vector.sub(this.p,this.op));
-//	console.log(dp)
+	
+	
+
 	if (dp<this.diff){
 		rem = (this.diff -dp) * this.pxin;
 		mov_x = Math.cos(this.ang_p) * rem;
@@ -110,7 +91,29 @@ tris.prototype.changer = function(){
 //		this.cp = this.cp;
 //	}
 	else{
-		this.reseter();
+		this.undulate();
 	}
+	this.show();
+}
+
+tris.prototype.undulate = function(){
+	
+	mov = this.und;
+	
+	rem = mov * this.pxin;
+	mov_x = Math.cos(this.ang_p) * rem;
+	mov_y = Math.sin(this.ang_p) * rem;
+	this.cp = createVector(this.op.x + mov_x,this.op.y+mov_y);
+
+	rem = mov * this.qxin;
+	mov_x = Math.cos(this.ang_q) * rem;
+	mov_y = Math.sin(this.ang_q) * rem;
+	this.cq = createVector(this.oq.x + mov_x,this.oq.y+mov_y);
+	
+	rem = mov * this.rxin;
+	mov_x = Math.cos(this.ang_r) * rem;
+	mov_y = Math.sin(this.ang_r) * rem;
+	this.cr = createVector(this.or.x + mov_x,this.or.y+mov_y);
+	
 	this.show();
 }

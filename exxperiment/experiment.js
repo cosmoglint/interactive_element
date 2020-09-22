@@ -2,6 +2,7 @@ var w_width = window.innerWidth;
 var w_height = window.innerHeight;
 var x = 80;
 var y = 80;
+var tri_size = 50;
 //var wn = w_width/x;
 //var hn = w_height/y;
 var noise_scale = 30;
@@ -34,10 +35,18 @@ function setter(){
 		for (j = 0; j < hn; j++){
 			l = i*x;
 			m = j*x
-			p = createVector(l,m-50);
-			q = createVector(l+50,m);
-			r = createVector(l-50,m);
-//			tries[i][j] = new tris(i*x,j*y);
+			tri_size = map(noise(i,j),0,1,60,70);
+			if ((i+j)%2 != 0){
+				p = createVector(l,m-tri_size+20);
+				q = createVector(l+tri_size,m+tri_size-20);
+				r = createVector(l-tri_size,m+tri_size-20);
+	//			tries[i][j] = new tris(i*x,j*y);
+			}
+			else{
+				p = createVector(l,m+tri_size-20);
+				q = createVector(l-tri_size,m-tri_size+20);
+				r = createVector(l+tri_size,m-tri_size+20);
+			}
 			tries[i][j] = new tris(p,q,r);
 		}
 	}
@@ -62,7 +71,7 @@ function reportsize(){
 
 window.addEventListener('resize', reportsize);
 
-window.addEventListener('mousemove', aversion);
+//window.addEventListener('mousemove', aversion);
 
 function init(){
 	ww = window.innerWidth;
@@ -100,18 +109,18 @@ function draw(){
 	moving += 0.01;
 	i_off = moving;
 	for (i = 0; i < wn; i++){
-		j_off = 0;
+		j_off = moving;
 		for (j = 0; j < hn; j++){
 			tries[i][j].set_und(map(noise(i_off,j_off),0,1,0,30));
 			j_off += 0.1;
 		}
 		i_off += 0.1;
 	}
-	background(49,49,49);
+	background(140,40,200);
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
 			var t = tries[i][j];
-			t.undulate();
+			aversion();
 			t.show()
 		}
 	}
