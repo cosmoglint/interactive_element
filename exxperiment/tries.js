@@ -2,6 +2,7 @@ function tris(p,q,r){
 	//o is original position
 	//m is midpoint of the points opposite line
 	//c is current position
+	this.col = 0;
 	this.und = 0;
 	this.op = p;
 	this.oq = q;
@@ -35,10 +36,11 @@ function tris(p,q,r){
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
-	this.diff = 100;
+	this.diff = 70;
 }
 tris.prototype.show = function(){
-	strokeWeight(1);
+//	fill(150,10,this.col);
+	strokeWeight(0);
 	triangle(this.cp.x,this.cp.y,this.cq.x,this.cq.y,this.cr.x,this.cr.y);
 }
 
@@ -50,6 +52,7 @@ tris.prototype.reseter = function(){
 }
 
 tris.prototype.set_und = function(uu){
+	this.col = map(uu,0,30,0,255);
 	this.und = uu;
 }
 
@@ -78,15 +81,17 @@ tris.prototype.changer = function(){
 //
 //	}
 	
-	if (dp<this.diff){
+	if (dp<=this.diff){
 		rem = (this.diff -dp) * this.pxin;
 		mov_x = Math.cos(this.ang_p) * rem;
 		mov_y = Math.sin(this.ang_p) * rem;
 		this.cp = createVector(this.op.x + mov_x,this.op.y+mov_y);
+//		this.cq = createVector(this.oq.x + mov_x,this.oq.y+mov_y);
+//		this.cr = createVector(this.or.x + mov_x,this.or.y+mov_y);
 //		this.cq = createVector(this.oq.x+rem,this.oq.y);
 //		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
-	else if (dq<this.diff){
+	else if (dq<=this.diff){
 		rem = (this.diff -dq) * this.qxin;
 		mov_x = Math.cos(this.ang_q) * rem;
 		mov_y = Math.sin(this.ang_q) * rem;
@@ -94,7 +99,7 @@ tris.prototype.changer = function(){
 //		this.cq = createVector(this.oq.x+rem,this.oq.y);
 //		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
-	else if (dr<this.diff){
+	else if (dr<=this.diff){
 		rem = (this.diff -dr) * this.rxin;
 		mov_x = Math.cos(this.ang_r) * rem;
 		mov_y = Math.sin(this.ang_r) * rem;
@@ -102,9 +107,9 @@ tris.prototype.changer = function(){
 //		this.cq = createVector(this.oq.x+rem,this.oq.y);
 //		this.cr = createVector(this.or.x-rem,this.or.y);
 	}
-//	else if (dp==50){
-//		this.cp = this.cp;
-//	}
+	else if (dp==50){
+		this.cp = this.cp;
+	}
 	else{
 		this.undulate();
 	}

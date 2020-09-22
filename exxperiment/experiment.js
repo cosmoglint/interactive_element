@@ -119,12 +119,13 @@ function draw(){
 	for (i = 0; i < wn; i++){
 		j_off = moving;
 		for (j = 0; j < hn; j++){
-			tries[i][j].set_und(map(noise(i_off,j_off),0,1,0,30));
+			tries[i][j].set_und(map(noise(i_off,j_off),0,1,0,10));
 			j_off += 0.1;
 		}
 		i_off += 0.1;
 	}
 	console.log(col_c);
+	background(240,240,240);
 	background(100,40,map(noise(col_c,tim),0,1,0,255));
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
