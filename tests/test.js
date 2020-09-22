@@ -41,9 +41,12 @@ function init(){
 	background(49,49,49);
 	canvas.position(0,0);
 	canvas.style('z-index','-1');
-	p = createVector(ww/2,50);
-	q = createVector(ww-50,wh-50);
-	r = createVector(50,wh-50);
+	p = createVector(50,50);
+	q = createVector(ww/2,wh-50);
+	r = createVector(ww-300,wh-50);
+//	p = createVector(50,50);
+//	q = createVector(ww-200,50);
+//	r = createVector(ww/2,wh-50);
 	the_tr = new tris(p,q,r);
 }
 

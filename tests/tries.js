@@ -8,15 +8,31 @@ function tris(p,q,r){
 	this.mp = p5.Vector.div(p5.Vector.add(this.oq,this.or),2);
 	this.mq = p5.Vector.div(p5.Vector.add(this.op,this.or),2);
 	this.mr = p5.Vector.div(p5.Vector.add(this.oq,this.op),2);
-	this.ang_p = atan((this.mp.y-this.op.y)/(this.mp.x-this.op.x));// * Math.PI/180;
-	this.ang_q = atan((this.mq.y-this.oq.y)/(this.mq.x-this.oq.x));// * Math.PI/180;
-	this.ang_r = atan((this.mr.y-this.or.y)/(this.mr.x-this.or.x));// * Math.PI/180;	
+	this.slope_p = (this.mp.y-this.op.y)/(this.mp.x-this.op.x);
+	this.slope_q = (this.mq.y-this.oq.y)/(this.mq.x-this.oq.x);
+	this.slope_r = (this.mr.y-this.or.y)/(this.mr.x-this.or.x);
+	this.ang_p = atan(this.slope_p);// * Math.PI/180;
+	this.ang_q = atan(this.slope_q);// * Math.PI/180;
+	this.ang_r = atan(this.slope_r);// * Math.PI/180;	
 	this.const_p = this.mp.y-(this.ang_p) * this.mp.x;
 	this.const_q = this.mq.y-(this.ang_q) * this.mq.x;
-	this.const_r = this.mr.y-(this.ang_r) * this.mr.x;
-	this.pxin = (( - this.const_p )/this.ang_p)<0 ? -1 : 1;
-	this.qxin = (( - this.const_q )/this.ang_q)<0 ? -1 : 1;
-	this.rxin = (( - this.const_r )/this.ang_r)<0 ? -1 : 1;
+	this.const_r = this.mr.y-(this.ang_r) * this.mr.x; 
+	
+	this.xinp = (( - this.const_p )/this.ang_p);
+	this.xinq = (( - this.const_q )/this.ang_q);
+	this.xinr = (( - this.const_r )/this.ang_r);
+//	this.pxin = (( - this.const_p )/this.ang_p)<0 ? -1 : 1;
+//	this.qxin = (( - this.const_q )/this.ang_q)<0 ? -1 : 1;
+//	this.rxin = (( - this.const_r )/this.ang_r)<0 ? -1 : 1;
+	console.log(this.slope_p,this.slope_q,this.slope_r);
+	this.pxin = ((this.xinp<this.op.x && dist(this.xinp,0,this.mp.x,this.mp.y) < dist(this.xinp,0,this.op.x,this.op.y)) || (this.xinp>this.op.x && dist(this.xinp,0,this.op.x,this.op.y) < dist(this.xinp,0,this.mp.x,this.mp.y))) ? -1 : 1;
+	
+	this.qxin = ((this.xinq<this.oq.x && dist(this.xinq,0,this.mq.x,this.mq.y) < dist(this.xinq,0,this.oq.x,this.oq.y)) || (this.xinq>this.oq.x && dist(this.xinq,0,this.oq.x,this.oq.y) < dist(this.xinq,0,this.mq.x,this.mq.y))) ? -1 : 1;
+
+	this.rxin = ((this.xinr<this.or.x && dist(this.xinr,0,this.mr.x,this.mr.y) < dist(this.xinr,0,this.or.x,this.or.y)) || (this.xinr>this.or.x && dist(this.xinr,0,this.or.x,this.or.y) < dist(this.xinr,0,this.mr.x,this.mr.y))) ? -1 : 1;
+	
+	console.log(this.pxin,this.qxin,this.rxin);
+	
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
@@ -34,7 +50,7 @@ tris.prototype.reseter = function(){
 }
 
 tris.prototype.changer = function(){
-	console.log(this.ang_p);
+	console.log(this.ang_p,this.ang_q,this.ang_r);
 	
 	dp = dist(mouseX,mouseY,this.op.x,this.op.y);
 	dq = dist(mouseX,mouseY,this.oq.x,this.oq.y);
