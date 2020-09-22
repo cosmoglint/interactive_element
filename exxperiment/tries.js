@@ -2,6 +2,7 @@ function tris(p,q,r){
 	//o is original position
 	//m is midpoint of the points opposite line
 	//c is current position
+	this.und = 0;
 	this.op = p;
 	this.oq = q;
 	this.or = r;
@@ -24,19 +25,17 @@ function tris(p,q,r){
 //	this.pxin = (( - this.const_p )/this.ang_p)<0 ? -1 : 1;
 //	this.qxin = (( - this.const_q )/this.ang_q)<0 ? -1 : 1;
 //	this.rxin = (( - this.const_r )/this.ang_r)<0 ? -1 : 1;
-	console.log(this.slope_p,this.slope_q,this.slope_r);
 	this.pxin = ((this.xinp<this.op.x && dist(this.xinp,0,this.mp.x,this.mp.y) < dist(this.xinp,0,this.op.x,this.op.y)) || (this.xinp>this.op.x && dist(this.xinp,0,this.op.x,this.op.y) < dist(this.xinp,0,this.mp.x,this.mp.y))) ? -1 : 1;
 	
 	this.qxin = ((this.xinq<this.oq.x && dist(this.xinq,0,this.mq.x,this.mq.y) < dist(this.xinq,0,this.oq.x,this.oq.y)) || (this.xinq>this.oq.x && dist(this.xinq,0,this.oq.x,this.oq.y) < dist(this.xinq,0,this.mq.x,this.mq.y))) ? -1 : 1;
 
 	this.rxin = ((this.xinr<this.or.x && dist(this.xinr,0,this.mr.x,this.mr.y) < dist(this.xinr,0,this.or.x,this.or.y)) || (this.xinr>this.or.x && dist(this.xinr,0,this.or.x,this.or.y) < dist(this.xinr,0,this.mr.x,this.mr.y))) ? -1 : 1;
 	
-	console.log(this.pxin,this.qxin,this.rxin);
 	
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
-	this.diff = 300;
+	this.diff = 100;
 }
 tris.prototype.show = function(){
 	triangle(this.cp.x,this.cp.y,this.cq.x,this.cq.y,this.cr.x,this.cr.y);
@@ -49,8 +48,34 @@ tris.prototype.reseter = function(){
 		this.cr = this.or;
 }
 
+tris.prototype.set_und = function(uu){
+	this.und = uu;
+}
+
+tris.prototype.undulate = function(){
+	
+	mov = this.und;
+	
+	rem = mov * this.pxin;
+	mov_x = Math.cos(this.ang_p) * rem;
+	mov_y = Math.sin(this.ang_p) * rem;
+	this.cp = createVector(this.op.x + mov_x,this.op.y+mov_y);
+
+	rem = mov * this.qxin;
+	mov_x = Math.cos(this.ang_q) * rem;
+	mov_y = Math.sin(this.ang_q) * rem;
+	this.cq = createVector(this.oq.x + mov_x,this.oq.y+mov_y);
+	
+	rem = mov * this.rxin;
+	mov_x = Math.cos(this.ang_r) * rem;
+	mov_y = Math.sin(this.ang_r) * rem;
+	this.cr = createVector(this.or.x + mov_x,this.or.y+mov_y);
+	
+	this.show();
+}
+
 tris.prototype.changer = function(){
-	console.log(this.ang_p,this.ang_q,this.ang_r);
+//	console.log(this.ang_p,this.ang_q,this.ang_r);
 	
 	dp = dist(mouseX,mouseY,this.op.x,this.op.y);
 	dq = dist(mouseX,mouseY,this.oq.x,this.oq.y);
