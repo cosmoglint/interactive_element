@@ -8,6 +8,8 @@ var tri_size = 50;
 var noise_scale = 30;
 var tries = [];
 var moving = 0;
+var col_c = 0;
+var tim = 0;
 
 function avg(p1,p2){
 	ans = createVector((p1.x+p2.x)/2,(p1.y+p2.y)/2);
@@ -38,15 +40,19 @@ function setter(){
 			tri_size = map(noise(i,j),0,1,60,70);
 			if ((i+j)%2 != 0){
 				p = createVector(l,m-tri_size+20);
-				q = createVector(l+tri_size,m+tri_size-20);
-				r = createVector(l-tri_size,m+tri_size-20);
+				q = createVector(l+tri_size+20,m+tri_size-20);
+				r = createVector(l-tri_size-20,m+tri_size-20);
 	//			tries[i][j] = new tris(i*x,j*y);
 			}
 			else{
 				p = createVector(l,m+tri_size-20);
-				q = createVector(l-tri_size,m-tri_size+20);
-				r = createVector(l+tri_size,m-tri_size+20);
+				q = createVector(l-tri_size-20,m-tri_size+20);
+				r = createVector(l+tri_size+20,m-tri_size+20);
 			}
+//			sizer = 60;
+//			p = createVector(l+random(-sizer,sizer),m+random(-sizer,sizer));
+//			q = createVector(l+random(-sizer,sizer),m+random(-sizer,sizer));
+//			r = createVector(l+random(-sizer,sizer),m+random(-sizer,sizer));
 			tries[i][j] = new tris(p,q,r);
 		}
 	}
@@ -106,6 +112,8 @@ function setup(){
 }
 
 function draw(){
+	tim += 0.03;
+	col_c += 0.03;
 	moving += 0.01;
 	i_off = moving;
 	for (i = 0; i < wn; i++){
@@ -116,7 +124,8 @@ function draw(){
 		}
 		i_off += 0.1;
 	}
-	background(140,40,200);
+	console.log(col_c);
+	background(100,40,map(noise(col_c,tim),0,1,0,255));
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
 			var t = tries[i][j];
