@@ -59,7 +59,6 @@ function setter(){
 function setup(){
 	init();
 	console.log(vehicles);
-	
 }
 
 function draw(){

@@ -6,12 +6,18 @@ var ms = 0;
 //let coords = [40, 40, 80, 60, 100, 100, 60, 120, 50, 150];
 let coords = [];
 
+var bgsound ;
+
+//function preload(){
+//	bgsound = loadSound("../audio/wind_chimes_short.wav");
+//}
+
 function rand(){
 	return random(10,20);
 }
 
 function init(){
-	
+	bgsound = loadSound("../audio/wind_chimes_short.wav");
 	ww = window.innerWidth;
 	wh = window.innerHeight;
 	canvas = createCanvas(ww,wh);
@@ -24,23 +30,29 @@ function init(){
 function drawcurve(){
 	mx = mouseX;
 	my = mouseY;
+	rad = 20;
 	point_numbers = 10;
 	for (let i = 0; i<point_numbers; i+=2){
 		if (i <= point_numbers/4){
-			coords.push(mx+rand());
-			coords.push(my-rand());
+			coords.push(mx+rand() + rad);
+			coords.push(my-rand() - rad);
 		 }
 		else if(i <= point_numbers/2){
-			coords.push(mx+rand());
-			coords.push(my+rand());
+			coords.push(mx+rand() + rad);
+			coords.push(my+rand() + rad);
 		}
 		else if(i <= point_numbers*3/4){
-			coords.push(mx-rand());
-			coords.push(my+rand());
+			coords.push(mx-rand() - rad);
+			coords.push(my+rand() + rad);
 		}
-		else {
-			coords.push(mx-rand());
-			coords.push(my-rand());
+		else if(i <= point_numbers){
+			coords.push(mx-rand() - rad);
+			coords.push(my-rand() - rad);
+		}
+		else{
+			coords.push(rad);
+			coords.push(rad);
+			
 		}
 	}
 	console.log(coords);
@@ -54,7 +66,7 @@ function drawcurve(){
 	}
 	curveVertex(coords[coords.length-1],coords[coords.length-2]);
 	endShape();
-//	coords = [];
+	coords = [];
 }
 
 
