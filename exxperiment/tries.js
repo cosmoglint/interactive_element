@@ -36,7 +36,7 @@ function tris(p,q,r){
 	this.cp = p;
 	this.cq = q;
 	this.cr = r;
-	this.diff = 70;
+	this.diff = 50;
 }
 tris.prototype.show = function(){
 //	fill(150,10,this.col);

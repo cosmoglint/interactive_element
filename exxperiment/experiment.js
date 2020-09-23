@@ -112,9 +112,9 @@ function setup(){
 }
 
 function draw(){
-	tim += 0.03;
+	tim += 0.05;
 	col_c += 0.03;
-	moving += 0.01;
+	moving += 0.02;
 	i_off = moving;
 	for (i = 0; i < wn; i++){
 		j_off = moving;
@@ -124,14 +124,17 @@ function draw(){
 		}
 		i_off += 0.1;
 	}
-	console.log(col_c);
-	background(240,240,240);
-	background(100,40,map(noise(col_c,tim),0,1,0,255));
+	ncol = color(100,40,map(noise(col_c,tim),0,1,0,255));
+	background(ncol);
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
 			var t = tries[i][j];
-			aversion();
+			t.undulate();
 			t.show()
 		}
 	}
+	strokeWeight(1);
+	stroke(ncol);
+circle(mouseX,mouseY,100);
+	
 } 
