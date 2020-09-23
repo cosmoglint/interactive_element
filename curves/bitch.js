@@ -1,18 +1,18 @@
-function draw() {
-  background(255);
-  textAlign(CENTER);
+let song;
+let start = 1;
 
-  if (getAudioContext().state !== 'running') {
-    text('click to start audio', width/2, height/2);
-  } else {
-    text('audio is enabled', width/2, height/2);
-  }
+
+function setup() {
+  createCanvas(720, 200);
+  background(255, 0, 0);
 }
 
-function touchStarted() {
-  if (getAudioContext().state !== 'running') {
-    getAudioContext().resume();
-  }
-  var synth = new p5.MonoSynth();
-  synth.play('A4', 0.5, 0, 0.2);
+function mousePressed() {
+}
+
+
+x = document.getElementById("bgaudio")
+function playAudio(){
+	console.log("playing");
+	x.play();
 }

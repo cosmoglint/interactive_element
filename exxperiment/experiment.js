@@ -10,6 +10,12 @@ var tries = [];
 var moving = 0;
 var col_c = 0;
 var tim = 0;
+var bgsound;
+
+bgsound = document.getElementById("bgaudio")
+function playAudio(){
+	bgsound.play();
+}
 
 function avg(p1,p2){
 	ans = createVector((p1.x+p2.x)/2,(p1.y+p2.y)/2);
