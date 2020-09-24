@@ -12,9 +12,27 @@ var col_c = 0;
 var tim = 0;
 var bgsound;
 
-bgsound = document.getElementById("bgaudio")
+bgsound = document.getElementById("bgaudio");
+button = document.getElementById("play_button");
+
+function toggle_audio(){
+	if (bgsound.paused){
+		console.log(1);
+		playAudio();
+	}
+	else{
+		console.log(0);
+		pauseAudio();
+	}
+}
+
 function playAudio(){
 	bgsound.play();
+	button.innerHTML = "pause";
+}
+function pauseAudio(){
+	bgsound.pause();
+	button.innerHTML = "press to play music";
 }
 
 function avg(p1,p2){
@@ -130,7 +148,7 @@ function draw(){
 		}
 		i_off += 0.1;
 	}
-	ncol = color(100,40,map(noise(col_c,tim),0,1,0,255));
+	ncol = color(map(noise(col_c,tim),0,1,0,255),40,230);
 	background(ncol);
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
