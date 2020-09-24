@@ -41,6 +41,7 @@ function tris(p,q,r){
 tris.prototype.show = function(){
 //	fill(150,10,this.col);
 	strokeWeight(0);
+	fill(stuff_color);
 	triangle(this.cp.x,this.cp.y,this.cq.x,this.cq.y,this.cr.x,this.cr.y);
 }
 

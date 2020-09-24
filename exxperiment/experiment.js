@@ -12,6 +12,8 @@ var col_c = 0;
 var tim = 0;
 var bgsound;
 var move_magnitude = 1;
+var stuff_color;
+var cursor_color;
 
 bgsound = document.getElementById("bgaudio");
 button = document.getElementById("play_button");
@@ -102,10 +104,14 @@ function reportsize(){
 function change_direction(){
 	move_magnitude = -(move_magnitude);
 	if (move_magnitude==1){
-		fill('white');
+		circle_color = color("white");
+		stuff_color = color("white");
+		circle_color.setAlpha(150)
 	}
 	else{
-		fill(10,10,10);
+		circle_color = color(10,10,10);
+		circle_color.setAlpha(150);
+		stuff_color = (10,10,10);
 	}
 }
 
@@ -138,8 +144,10 @@ function init(){
 		i_off += 0.1;
 	}
 	
-	circle_col = ('white');
-	fill(circle_col);
+	circle_color = color("white");
+	circle_color.setAlpha(150);
+	stuff_color = ("white");
+	fill(circle_color);
 }
 
 
@@ -173,6 +181,7 @@ function draw(){
 	}
 	strokeWeight(1);
 	stroke(ncol);
+	fill(circle_color);
 circle(mouseX,mouseY,100);
 	
 } 
