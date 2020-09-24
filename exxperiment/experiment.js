@@ -11,6 +11,7 @@ var moving = 0;
 var col_c = 0;
 var tim = 0;
 var bgsound;
+var move_magnitude = 1;
 
 bgsound = document.getElementById("bgaudio");
 button = document.getElementById("play_button");
@@ -98,8 +99,18 @@ function reportsize(){
 	resizeCanvas(windowWidth,windowHeight);
 	init();
 }
+function change_direction(){
+	move_magnitude = -(move_magnitude);
+	if (move_magnitude==1){
+		fill('white');
+	}
+	else{
+		fill(10,10,10);
+	}
+}
 
 window.addEventListener('resize', reportsize);
+window.addEventListener('click', change_direction);
 
 //window.addEventListener('mousemove', aversion);
 
@@ -126,6 +137,9 @@ function init(){
 		}
 		i_off += 0.1;
 	}
+	
+	circle_col = ('white');
+	fill(circle_col);
 }
 
 
@@ -138,10 +152,10 @@ function setup(){
 function draw(){
 	tim += 0.05;
 	col_c += 0.03;
-	moving += 0.02;
+	moving += 0.02 * move_magnitude;
 	i_off = moving;
 	for (i = 0; i < wn; i++){
-		j_off = moving;
+		j_off = moving ;
 		for (j = 0; j < hn; j++){
 			tries[i][j].set_und(map(noise(i_off,j_off),0,1,0,10));
 			j_off += 0.1;
