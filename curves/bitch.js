@@ -13,6 +13,5 @@ function mousePressed() {
 
 x = document.getElementById("bgaudio")
 function playAudio(){
-	console.log("playing");
 	x.play();
 }
