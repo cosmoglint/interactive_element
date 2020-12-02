@@ -42,7 +42,7 @@ function avg(p1,p2){
 	ans = createVector((p1.x+p2.x)/2,(p1.y+p2.y)/2);
 	return ans;
 }
-	
+
 function random_color(){
 	r = random(0,255);
 	g = random(0,255);
@@ -60,21 +60,22 @@ function lister(ll,bb){
 }
 
 function setter(){
+	disval = 20;
 	for (i = 0; i < wn; i++){
 		for (j = 0; j < hn; j++){
 			l = i*x;
 			m = j*x
 			tri_size = map(noise(i,j),0,1,60,70);
 			if ((i+j)%2 != 0){
-				p = createVector(l,m-tri_size+20);
-				q = createVector(l+tri_size+20,m+tri_size-20);
-				r = createVector(l-tri_size-20,m+tri_size-20);
+				p = createVector(l,m-tri_size+disval);
+				q = createVector(l+tri_size+disval,m+tri_size-disval);
+				r = createVector(l-tri_size-disval,m+tri_size-disval);
 	//			tries[i][j] = new tris(i*x,j*y);
 			}
 			else{
-				p = createVector(l,m+tri_size-20);
-				q = createVector(l-tri_size-20,m-tri_size+20);
-				r = createVector(l+tri_size+20,m-tri_size+20);
+				p = createVector(l,m+tri_size-disval);
+				q = createVector(l-tri_size-disval,m-tri_size+disval);
+				r = createVector(l+tri_size+disval,m-tri_size+disval);
 			}
 //			sizer = 60;
 //			p = createVector(l+random(-sizer,sizer),m+random(-sizer,sizer));
@@ -143,7 +144,7 @@ function init(){
 		}
 		i_off += 0.1;
 	}
-	
+
 	circle_color = color("white");
 	circle_color.setAlpha(150);
 	stuff_color = ("white");
@@ -154,7 +155,7 @@ function init(){
 function setup(){
 	init();
 //	frameRate(10);
-	
+
 }
 
 function draw(){
@@ -165,7 +166,7 @@ function draw(){
 	for (i = 0; i < wn; i++){
 		j_off = moving ;
 		for (j = 0; j < hn; j++){
-			tries[i][j].set_und(map(noise(i_off,j_off),0,1,0,10));
+			tries[i][j].set_und(map(noise(i_off,j_off),0,1,0,8));
 			j_off += 0.1;
 		}
 		i_off += 0.1;
@@ -182,6 +183,6 @@ function draw(){
 	strokeWeight(1);
 	stroke(ncol);
 	fill(circle_color);
-circle(mouseX,mouseY,100);
-	
-} 
+circle(mouseX,mouseY,5);
+
+}
